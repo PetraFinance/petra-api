@@ -1,0 +1,9 @@
+*.pyc
+*.egg-info/
+*.swp
+*.swo
+env/
+*.db
+__pycache__/
+
+secrets.py
