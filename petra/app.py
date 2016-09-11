@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request
 import logging
 import os
+
+from flask import Flask
 
 from petra.api.auth import auth
 from petra.db import db
@@ -37,7 +38,8 @@ def not_found_error(error_details):
 if not app.debug:
     file_handler = logging.FileHandler('error.log')
     file_handler.setFormatter(
-        logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
+        logging.Formatter('%(asctime)s %(levelname)s: '
+                          '%(message)s [in %(pathname)s:%(lineno)d]')
     )
     app.logger.setLevel(logging.INFO)
     file_handler.setLevel(logging.INFO)
