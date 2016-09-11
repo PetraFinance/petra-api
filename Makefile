@@ -1,13 +1,28 @@
-.PHONY: help serve
+.PHONY: help lint serve
+
+BIN=env/bin/
 
 all: env/.ready
 
-env/:
+$(BIN)/pip:
 	virtualenv env/ --python=python3
 
-env/.ready: env/ requirements.txt
-	env/bin/pip install -r requirements.txt
+$(BIN)/pip-compile $(BIN)/pip-sync: $(BIN)/pip
+	$(BIN)/pip install pip-tools
+
+requirements.txt: $(BIN)/pip-compile requirements.in
+	$(BIN)/pip-compile requirements.in
+
+requirements-dev.txt: $(BIN)/pip-compile requirements-dev.in
+	$(BIN)/pip-compile requirements-dev.in
+
+env/.ready: requirements.txt requirements-dev.txt $(BIN)/pip-sync
+	$(BIN)/pip-sync requirements.txt requirements-dev.txt
+	$(BIN)/pip install -e ./
 	touch env/.ready
 
 serve: env/.ready
 	env/bin/python petra-api.py
+
+lint: env/.ready
+	env/bin/flake8 petra/

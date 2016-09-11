@@ -10,6 +10,9 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+with open(path.join(here, 'requirements.in'), encoding='utf-8') as f:
+    requirements = f.read().splitlines()
+
 setup(
     name='petra',
 
@@ -44,4 +47,6 @@ setup(
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
+
+    install_requires=requirements,
 )
