@@ -22,7 +22,7 @@ env/.ready: requirements.txt requirements-dev.txt $(BIN)/pip-sync
 	touch env/.ready
 
 serve: env/.ready
-	env/bin/python petra-api.py
+	env/bin/python petra/app.py
 
 lint: env/.ready
 	env/bin/flake8 petra/
