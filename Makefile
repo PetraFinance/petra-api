@@ -1,4 +1,4 @@
-.PHONY: help lint serve
+.PHONY: clean help lint serve
 
 BIN=env/bin/
 
@@ -20,6 +20,10 @@ env/.ready: requirements.txt requirements-dev.txt $(BIN)/pip-sync
 	$(BIN)/pip-sync requirements.txt requirements-dev.txt
 	$(BIN)/pip install -e ./
 	touch env/.ready
+
+clean:
+	find . -type f -name "*.py[co]" -delete
+	find . -type d -name "__pycache__" -delete
 
 serve: env/.ready
 	env/bin/python petra/app.py

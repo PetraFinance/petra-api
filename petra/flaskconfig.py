@@ -8,7 +8,7 @@ SECRET_KEY = config['FLASK_SECRET_KEY']
 
 # Connect to the database
 DB = config['DB']
-SQLALCHEMY_DATABASE_URI = '{}:///{}:{}@{}/db'.format(
+SQLALCHEMY_DATABASE_URI = '{}://{}:{}@{}:3306/db'.format(
     DB['TYPE'],
     DB['USER'],
     DB['PASS'],
