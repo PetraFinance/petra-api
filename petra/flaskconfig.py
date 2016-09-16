@@ -7,7 +7,7 @@ DEBUG = config.get('FLASK_DEBUG_MODE', False)
 SECRET_KEY = config['FLASK_SECRET_KEY']
 
 # Connect to the database
-DB = config['MYSQL']
+DB = config['DB']
 SQLALCHEMY_DATABASE_URI = '{}:///{}:{}@{}/db'.format(
     DB['TYPE'],
     DB['USER'],
