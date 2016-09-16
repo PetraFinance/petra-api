@@ -1,6 +1,7 @@
 flask
 flask-sqlalchemy
 mysqlclient
+plaid-python
 pyyaml
 requests
 sqlalchemy

@@ -4,6 +4,7 @@ import os
 from flask import Flask
 
 from petra.api.auth import auth
+from petra.api.finance import finance
 from petra.db import db
 from petra.jsend import error, success
 from petra.models import User
@@ -21,6 +22,7 @@ def home():
     return success(User.serialize_list(User.query.all()))
 
 app.register_blueprint(auth, url_prefix='/auth')
+app.register_blueprint(finance, url_prefix='/finance')
 
 
 # Error handlers.
