@@ -9,7 +9,7 @@ from petra.jsend import error, success
 from petra.models import User
 
 app = Flask(__name__)
-app.config.from_object('config')
+app.config.from_object('flaskconfig')
 
 db.init_app(app)
 with app.app_context():

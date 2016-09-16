@@ -1,17 +1,8 @@
 import os
 
-# Grabs the folder where the script runs.
-basedir = os.path.abspath(os.path.dirname(__file__))
+import yaml
 
-# Enable debug mode.
-DEBUG = True
+CONFIG_PATH = os.environ.get('CONFIG_PATH', 'config.yml')
 
-# Secret key for session management. You can generate random strings here:
-# http://clsc.net/tools-old/random-string-generator.php
-SECRET_KEY = '\xd4\x1bB157\xe1U\xa7\x83y\xf2G:\xb1\xf73\xa1;\x12C\xce\xe5\x15'
-
-# Connect to the database
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'dev.db')
-
-# Disable warning about deprecated feature
-SQLALCHEMY_TRACK_MODIFICATIONS = False
+with open(CONFIG_PATH, 'r') as config_file:
+    config = yaml.load(config_file)

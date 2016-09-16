@@ -1,7 +1,7 @@
 import requests
 from flask import abort, Blueprint, request, session
 
-from petra.secrets import facebook
+from petra.config import config
 from petra.jsend import error, fail, success
 
 auth = Blueprint('auth', __name__)
@@ -11,7 +11,8 @@ auth = Blueprint('auth', __name__)
 def oauth_redirect():
     return success('https://www.facebook.com/dialog/oauth?'
                    'client_id={}&redirect_uri={}&scope=email'.format(
-                       facebook['app_id'], facebook['redirect_uri']
+                       config['FACEBOOK']['APP_ID'],
+                       config['FACEBOOK']['REDIRECT_URI'],
                    ))
 
 
@@ -24,9 +25,9 @@ def oauth_callback():
 
     r = requests.get('https://graph.facebook.com/v2.3/oauth/access_token',
                      params={
-                         'client_id': facebook['app_id'],
-                         'client_secret': facebook['app_secret'],
-                         'redirect_uri': facebook['redirect_uri'],
+                         'client_id': config['FACEBOOK']['APP_ID'],
+                         'client_secret': config['FACEBOOK']['APP_SECRET'],
+                         'redirect_uri': config['FACEBOOK']['REDIRECT_URI'],
                          'code': code,
                      })
 
