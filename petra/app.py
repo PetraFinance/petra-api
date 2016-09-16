@@ -18,7 +18,7 @@ with app.app_context():
 
 @app.route('/')
 def home():
-    return success(User.query.all())
+    return success(User.serialize_list(User.query.all()))
 
 app.register_blueprint(auth, url_prefix='/auth')
 

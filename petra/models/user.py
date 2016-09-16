@@ -1,14 +1,14 @@
 from petra.db import db
+from petra.serializer import Serializer
 
 
-class User(db.Model):
+class User(db.Model, Serializer):
     __tablename__ = 'Users'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True)
+    name = db.Column(db.String(120))
     email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(30))
 
-    def __init__(self, name=None, password=None):
+    def __init__(self, name=None, email=None):
         self.name = name
-        self.password = password
+        self.email = email
