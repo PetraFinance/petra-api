@@ -8,9 +8,11 @@ from petra.api.finance import finance
 from petra.db import db
 from petra.jsend import error, success
 from petra.models import User
+from petra.serializer import SerializingJSONEncoder
 
 app = Flask(__name__)
 app.config.from_object('flaskconfig')
+app.json_encoder = SerializingJSONEncoder
 
 db.init_app(app)
 with app.app_context():
@@ -19,7 +21,7 @@ with app.app_context():
 
 @app.route('/')
 def home():
-    return success(User.serialize_list(User.query.all()))
+    return success(User.query.all())
 
 app.register_blueprint(auth, url_prefix='/auth')
 app.register_blueprint(finance, url_prefix='/finance')
