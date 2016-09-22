@@ -1,5 +1,6 @@
 from sqlalchemy.inspection import inspect
 
+
 class Serializer(object):
 
     def serialize(self):

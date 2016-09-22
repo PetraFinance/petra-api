@@ -1,10 +1,6 @@
-import requests
-from flask import abort, Blueprint, request, session
+from flask import Blueprint
 
-from petra.config import config
-from petra.db import db
-from petra.jsend import error, fail, success
-from petra.models import User
+from petra.jsend import success
 from petra.plaid_client import client
 
 finance = Blueprint('finance', __name__)
@@ -14,6 +10,7 @@ finance = Blueprint('finance', __name__)
 def institutions():
     data = client.institutions().json()
     return success(data)
+
 
 @finance.route('/categories')
 def categories():
