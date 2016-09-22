@@ -85,4 +85,39 @@ def new_account():
     db.session.add(user)
     db.session.commit()
 
-    return success(data)
+    session['email'] = email
+    return success(user)
+
+
+@auth.route('/login', methods=['POST'])
+def login():
+    if session.get('email', None):
+        return fail('Already logged in')
+
+    access_token = session.get('fb_token', None)
+    if access_token is None:
+        return fail('No facebook access token')
+
+    r = requests.get('https://graph.facebook.com/v2.3/me',
+                     params={
+                         'fields': 'email',
+                         'access_token': access_token,
+                     })
+
+    data = r.json()
+
+    if 'error' in data:
+        return fail(data['error']['message'])
+
+    email = data.get('email', None)
+
+    if not email:
+        return fail('Bad response from facebook API')
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return fail('No account')
+
+    session['email'] = email
+    return success(user)
