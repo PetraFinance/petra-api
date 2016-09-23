@@ -4,6 +4,7 @@ import os
 from flask import Flask
 
 from petra.api.auth import auth
+from petra.api.connections import connections
 from petra.api.finance import finance
 from petra.db import db
 from petra.jsend import error, success
@@ -30,10 +31,11 @@ def health():
 
 
 app.register_blueprint(auth, url_prefix='/auth')
+app.register_blueprint(connections, url_prefix='/connections')
 app.register_blueprint(finance, url_prefix='/finance')
 
-
 # Error handlers.
+
 
 @app.errorhandler(500)
 def internal_error(error_details):
