@@ -9,7 +9,7 @@ class User(db.Model, Serializer):
     name = db.Column(db.String(120))
     email = db.Column(db.String(120), unique=True)
 
-    connections = db.relationship('Connection')
+    connections = db.relationship('Connection', lazy='dynamic')
 
     def __init__(self, name=None, email=None):
         self.name = name

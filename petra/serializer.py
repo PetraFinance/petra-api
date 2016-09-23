@@ -1,5 +1,6 @@
 from flask.json import JSONEncoder
 from sqlalchemy.inspection import inspect
+from sqlalchemy.orm.query import Query
 
 
 class Serializer(object):
@@ -18,6 +19,12 @@ class SerializingJSONEncoder(JSONEncoder):
         if isinstance(obj, Serializer):
             try:
                 return obj.serialize()
+            except:
+                pass
+
+        if isinstance(obj, Query):
+            try:
+                return obj.all()
             except:
                 pass
 

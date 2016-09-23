@@ -10,7 +10,7 @@ class Connection(db.Model, Serializer):
     plaid_token = db.Column(db.String(180))
 
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'))
-    accounts = db.relationship('Account')
+    accounts = db.relationship('Account', lazy='dynamic')
 
     def __init__(self, account_type, plaid_token):
         self.account_type = account_type
