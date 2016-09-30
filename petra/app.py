@@ -23,6 +23,12 @@ with app.app_context():
 def home():
     return success(User.query.all())
 
+
+@app.route('/health')
+def health():
+    return success('ok')
+
+
 app.register_blueprint(auth, url_prefix='/auth')
 app.register_blueprint(finance, url_prefix='/finance')
 
