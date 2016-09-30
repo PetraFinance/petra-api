@@ -11,7 +11,7 @@ from petra.models import User
 from petra.serializer import SerializingJSONEncoder
 
 app = Flask(__name__)
-app.config.from_object('flaskconfig')
+app.config.from_object('petra.flaskconfig')
 app.json_encoder = SerializingJSONEncoder
 
 db.init_app(app)

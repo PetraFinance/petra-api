@@ -1,4 +1,4 @@
-.PHONY: clean help lint serve
+.PHONY: clean help lint serve test
 
 BIN=env/bin/
 
@@ -29,4 +29,7 @@ serve: env/.ready
 	env/bin/python petra/app.py
 
 lint: env/.ready
-	env/bin/flake8 petra/
+	env/bin/flake8 petra/ test/
+
+test: env/.ready
+	env/bin/pytest test/
