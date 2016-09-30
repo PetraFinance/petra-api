@@ -23,9 +23,6 @@ class SerializingJSONEncoder(JSONEncoder):
                 pass
 
         if isinstance(obj, Query):
-            try:
-                return obj.all()
-            except:
-                pass
+            return obj.all()
 
         return JSONEncoder.default(self, obj)
