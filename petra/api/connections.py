@@ -1,4 +1,4 @@
-from flask import Blueprint, g, request
+from flask import Blueprint, g, render_template, request
 
 from petra.db import db
 from petra.jsend import fail, success
@@ -15,6 +15,7 @@ def login_succeeded():
         plaid_token=client.access_token,
     )
 
+    # TODO: add timeout here
     data = client.connect_get().json()
 
     user = g.user
@@ -49,3 +50,8 @@ def new_connection():
     client.exchange_token(public_token)
 
     return login_succeeded()
+
+
+@connections.route('/plaid_link')
+def plaid_link():
+    return render_template('plaid_webview.html')

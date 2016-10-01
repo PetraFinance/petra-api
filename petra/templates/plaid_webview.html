@@ -1,0 +1,36 @@
+<!doctype html>
+<title>Connect with Plaid</title>
+<body>
+  <script src="https://cdn.plaid.com/link/stable/link-initialize.js"></script>
+  <script type="text/javascript">
+    var linkHandler = Plaid.create({
+      env: 'tartan',
+      clientName: 'Petra',
+      key: 'bcc7e7ff5ad490ec101d6f979d695b',
+      product: 'connect',
+      // To use Link with longtail institutions on Connect, set the
+      // 'longtail' option to true:
+      // longtail: true,
+      onLoad: function() {
+        // The Link module finished loading.
+        window.setTimeout(function() {
+          linkHandler.open();
+        }, 100);
+      },
+      onSuccess: function(public_token, metadata) {
+        // Send the public_token to your app server here.
+        // The metadata object contains info about the institution the
+        // user selected and the account ID, if selectAccount is enabled.
+        console.log(metadata);
+        console.log(public_token);
+        var httpRequest = new XMLHttpRequest();
+        httpRequest.open('POST', '/connections/new');
+        httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        httpRequest.send('public_token='+public_token);
+      },
+      onExit: function() {
+        // The user exited the Link flow.
+      }
+    });
+  </script>
+</body>
