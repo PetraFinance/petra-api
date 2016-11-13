@@ -1,6 +1,7 @@
 {
     "dev": {
         "app_function": "petra.app.app", 
+        "domain": "dev.trypetra.com",
         "s3_bucket": "zappa-121retuwm",
         "timeout_seconds": 8,
 				"vpc_config": {
