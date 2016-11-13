@@ -1,0 +1,16 @@
+{
+    "dev": {
+        "app_function": "petra.app.app", 
+        "s3_bucket": "zappa-121retuwm",
+        "timeout_seconds": 8,
+				"vpc_config": {
+            "SubnetIds": [
+              "subnet-3cb27c11",
+              "subnet-f09459ab",
+              "subnet-4c1ca205",
+              "subnet-6726d85b"
+            ],
+            "SecurityGroupIds": [ "sg-f62f158c" ]
+        }
+    }
+}

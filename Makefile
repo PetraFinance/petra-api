@@ -5,7 +5,7 @@ BIN=env/bin/
 all: env/.ready
 
 $(BIN)/pip:
-	virtualenv env/ --python=python3
+	virtualenv env/ --python=python2
 
 $(BIN)/pip-compile $(BIN)/pip-sync: $(BIN)/pip
 	$(BIN)/pip install pip-tools
@@ -13,10 +13,10 @@ $(BIN)/pip-compile $(BIN)/pip-sync: $(BIN)/pip
 requirements.txt: $(BIN)/pip-compile requirements.in
 	$(BIN)/pip-compile requirements.in
 
-requirements-dev.txt: $(BIN)/pip-compile requirements-dev.in
-	$(BIN)/pip-compile requirements-dev.in
+requirements-dev.txt: $(BIN)/pip-compile requirements.in requirements-dev.in
+	$(BIN)/pip-compile requirements.in requirements-dev.in --output-file requirements-dev.txt
 
-env/.ready: requirements.txt requirements-dev.txt $(BIN)/pip-sync
+env/.ready: requirements-dev.txt requirements.txt $(BIN)/pip-sync
 	$(BIN)/pip-sync requirements.txt requirements-dev.txt
 	$(BIN)/pip install -e ./
 	touch env/.ready

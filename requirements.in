@@ -1,7 +1,7 @@
 flask
 flask-sqlalchemy
-mysqlclient
-plaid-python
+petra-plaid-python
+pymysql
 pyyaml
 requests
 sqlalchemy
