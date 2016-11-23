@@ -2,6 +2,8 @@
     "dev": {
         "app_function": "petra.app.app", 
         "domain": "dev.trypetra.com",
+        "lets_encrypt_key": "s3://petra-secret-ssl-key/account.key",
+        "lets_encrypt_schedule": "rate(15 days)",
         "s3_bucket": "zappa-121retuwm",
         "timeout_seconds": 8,
 				"vpc_config": {
